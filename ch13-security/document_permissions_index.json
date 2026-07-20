@@ -1,0 +1,26 @@
+{
+  "name": "knowledge",
+  "permissionFilterOption": "enabled",
+  "fields": [
+    { "name": "id",      "type": "Edm.String", "key": true },
+    { "name": "content", "type": "Edm.String", "searchable": true },
+    {
+      "name": "GroupIds",
+      "type": "Collection(Edm.String)",
+      "filterable": true,
+      "permissionFilter": "groupIds"
+    },
+    {
+      "name": "UserIds",
+      "type": "Collection(Edm.String)",
+      "filterable": true,
+      "permissionFilter": "userIds"
+    },
+    {
+      "name": "RbacScope",
+      "type": "Edm.String",
+      "filterable": true,
+      "permissionFilter": "rbacScope"
+    }
+  ]
+}

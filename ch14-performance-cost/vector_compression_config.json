@@ -1,0 +1,11 @@
+{
+"compressions": [
+  {
+    "name": "scalar-quant",
+    "kind": "scalarQuantization",
+    "rerankWithOriginalVectors": true,
+    "defaultOversampling": 4,
+    "scalarQuantizationParameters": { "quantizedDataType": "int8" }
+  }
+]
+}

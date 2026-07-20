@@ -1,0 +1,10 @@
+{
+"analyzers": [
+  {
+    "name": "clean_text",
+    "@odata.type": "#Microsoft.Azure.Search.CustomAnalyzer",
+    "tokenizer": "standard_v2",
+    "tokenFilters": [ "lowercase", "asciifolding" ]
+  }
+]
+}

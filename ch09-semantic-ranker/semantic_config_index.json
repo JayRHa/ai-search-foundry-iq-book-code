@@ -1,0 +1,30 @@
+{
+  "name": "kb-index",
+  "fields": [
+    { "name": "id",       "type": "Edm.String", "key": true },
+    { "name": "title",    "type": "Edm.String", "searchable": true, "retrievable": true },
+    { "name": "content",  "type": "Edm.String", "searchable": true, "retrievable": true },
+    { "name": "summary",  "type": "Edm.String", "searchable": true, "retrievable": true },
+    { "name": "tags",     "type": "Collection(Edm.String)", "searchable": true, "retrievable": true },
+    { "name": "product",  "type": "Edm.String", "searchable": true, "retrievable": true, "filterable": true }
+  ],
+  "semantic": {
+    "defaultConfiguration": "kb-semantic",
+    "configurations": [
+      {
+        "name": "kb-semantic",
+        "prioritizedFields": {
+          "titleField": { "fieldName": "title" },
+          "prioritizedContentFields": [
+            { "fieldName": "summary" },
+            { "fieldName": "content" }
+          ],
+          "prioritizedKeywordsFields": [
+            { "fieldName": "tags" },
+            { "fieldName": "product" }
+          ]
+        }
+      }
+    ]
+  }
+}

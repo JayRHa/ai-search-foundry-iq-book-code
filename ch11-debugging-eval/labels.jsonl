@@ -1,0 +1,3 @@
+{"query_id": "q001", "query": "How do I rotate the SAML signing certificate?", "relevant": [{"doc_id": "sso-guide-07", "grade": 3}, {"doc_id": "sso-guide-08", "grade": 2}]}
+{"query_id": "q002", "query": "What is the maximum size of a single indexed document?", "relevant": [{"doc_id": "limits-ref-02", "grade": 3}]}
+{"query_id": "q003", "query": "Does the free tier support semantic ranking?", "relevant": [{"doc_id": "tier-compare-01", "grade": 3}, {"doc_id": "pricing-faq-11", "grade": 1}]}

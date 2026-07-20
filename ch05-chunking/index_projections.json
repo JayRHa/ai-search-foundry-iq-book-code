@@ -1,0 +1,20 @@
+{
+"indexProjections": {
+  "selectors": [
+    {
+      "targetIndexName": "docs-chunks",
+      "parentKeyFieldName": "parent_id",
+      "sourceContext": "/document/chunks/*",
+      "mappings": [
+        { "name": "chunk",       "source": "/document/chunks/*" },
+        { "name": "vector",      "source": "/document/chunks/*/vector" },
+        { "name": "title",       "source": "/document/title" },
+        { "name": "source_path", "source": "/document/metadata_storage_path" }
+      ]
+    }
+  ],
+  "parameters": {
+    "projectionMode": "skipIndexingParentDocuments"
+  }
+}
+}

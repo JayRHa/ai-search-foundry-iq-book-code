@@ -1,0 +1,35 @@
+{
+"vectorSearch": {
+  "algorithms": [
+    {
+      "name": "hnsw-config",
+      "kind": "hnsw",
+      "hnswParameters": {
+        "m": 4,
+        "efConstruction": 400,
+        "efSearch": 500,
+        "metric": "cosine"
+      }
+    }
+  ],
+  "compressions": [
+    {
+      "name": "scalar-compression",
+      "kind": "scalarQuantization",
+      "scalarQuantizationParameters": { "quantizedDataType": "int8" },
+      "rescoringOptions": {
+        "enableRescoring": true,
+        "defaultOversampling": 4,
+        "rescoreStorageMethod": "preserveOriginals"
+      }
+    }
+  ],
+  "profiles": [
+    {
+      "name": "hnsw-cosine-compressed",
+      "algorithm": "hnsw-config",
+      "compression": "scalar-compression"
+    }
+  ]
+}
+}

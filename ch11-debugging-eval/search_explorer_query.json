@@ -1,0 +1,16 @@
+{
+  "search": "how do I rotate the signing certificate",
+  "queryType": "semantic",
+  "semanticConfiguration": "default",
+  "vectorQueries": [
+    {
+      "kind": "text",
+      "text": "how do I rotate the signing certificate",
+      "fields": "contentVector",
+      "k": 50
+    }
+  ],
+  "select": "title,chunk,url",
+  "top": 10,
+  "count": true
+}

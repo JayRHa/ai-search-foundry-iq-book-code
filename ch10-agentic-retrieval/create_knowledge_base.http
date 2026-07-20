@@ -1,0 +1,24 @@
+PUT https://my-search.search.windows.net/knowledgebases/support-kb?api-version=2026-05-01-preview
+Content-Type: application/json
+Authorization: Bearer {{accessToken}}
+
+{
+  "name": "support-kb",
+  "description": "Grounds the support assistant on handbook and product docs.",
+  "knowledgeSources": [
+    { "name": "kb-docs-ks" }
+  ],
+  "outputMode": "answerSynthesis",
+  "answerInstructions": "Answer concisely from the retrieved documents. Cite each source by its ref_id. If the answer isn't in the sources, say you don't know.",
+  "models": [
+    {
+      "kind": "azureOpenAI",
+      "azureOpenAIParameters": {
+        "resourceUri": "https://my-aoai.openai.azure.com",
+        "deploymentId": "gpt-4.1-mini",
+        "modelName": "gpt-4.1-mini"
+      }
+    }
+  ],
+  "retrievalReasoningEffort": { "kind": "low" }
+}

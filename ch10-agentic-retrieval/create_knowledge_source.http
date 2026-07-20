@@ -1,0 +1,19 @@
+PUT https://my-search.search.windows.net/knowledgesources/kb-docs-ks?api-version=2026-05-01-preview
+Content-Type: application/json
+Authorization: Bearer {{accessToken}}
+
+{
+  "name": "kb-docs-ks",
+  "kind": "searchIndex",
+  "description": "Company handbook and product documentation, chunked and vectorized.",
+  "searchIndexParameters": {
+    "searchIndexName": "kb-docs",
+    "semanticConfigurationName": "kb-semantic",
+    "sourceDataFields": [
+      { "name": "title" },
+      { "name": "content" },
+      { "name": "url" },
+      { "name": "page" }
+    ]
+  }
+}

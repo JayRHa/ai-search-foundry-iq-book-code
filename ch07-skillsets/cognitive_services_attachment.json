@@ -1,0 +1,6 @@
+{
+"cognitiveServices": {
+  "@odata.type": "#Microsoft.Azure.Search.AIServicesByIdentity",
+  "subdomainUrl": "https://my-foundry-resource.cognitiveservices.azure.com"
+}
+}

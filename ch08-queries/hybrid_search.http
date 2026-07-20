@@ -1,0 +1,17 @@
+POST https://{service}.search.windows.net/indexes/kb-index/docs/search?api-version=2026-04-01
+Content-Type: application/json
+
+{
+  "search": "reset my password",
+  "searchFields": "title,chunk",
+  "vectorQueries": [
+    {
+      "kind": "text",
+      "text": "reset my password",
+      "fields": "text_vector",
+      "k": 50
+    }
+  ],
+  "select": "chunk_id,parent_id,title,chunk",
+  "top": 10
+}

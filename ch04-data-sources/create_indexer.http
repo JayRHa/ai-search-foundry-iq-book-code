@@ -1,0 +1,29 @@
+POST https://my-search-service.search.windows.net/indexers?api-version=2026-04-01
+Content-Type: application/json
+
+{
+  "name": "product-docs-indexer",
+  "dataSourceName": "product-docs-blob",
+  "targetIndexName": "product-docs",
+  "schedule": {
+    "interval": "PT2H",
+    "startTime": "2026-07-20T02:00:00Z"
+  },
+  "parameters": {
+    "batchSize": 10,
+    "maxFailedItems": 10,
+    "maxFailedItemsPerBatch": 5,
+    "configuration": {
+      "dataToExtract": "contentAndMetadata",
+      "parsingMode": "default",
+      "failOnUnsupportedContentType": false
+    }
+  },
+  "fieldMappings": [
+    {
+      "sourceFieldName": "metadata_storage_path",
+      "targetFieldName": "id",
+      "mappingFunction": { "name": "base64Encode" }
+    }
+  ]
+}

@@ -1,0 +1,41 @@
+{
+"scoringProfiles": [
+  {
+    "name": "docqa-boost",
+    "text": {
+      "weights": {
+        "title": 3,
+        "content": 1
+      }
+    },
+    "functions": [
+      {
+        "type": "freshness",
+        "fieldName": "lastModified",
+        "boost": 2,
+        "interpolation": "quadratic",
+        "freshness": { "boostingDuration": "P90D" }
+      },
+      {
+        "type": "magnitude",
+        "fieldName": "viewCount",
+        "boost": 1.5,
+        "interpolation": "logarithmic",
+        "magnitude": {
+          "boostingRangeStart": 0,
+          "boostingRangeEnd": 5000,
+          "constantBoostBeyondRange": true
+        }
+      },
+      {
+        "type": "tag",
+        "fieldName": "securityTags",
+        "boost": 2,
+        "interpolation": "linear",
+        "tag": { "tagsParameter": "userTags" }
+      }
+    ],
+    "functionAggregation": "sum"
+  }
+]
+}

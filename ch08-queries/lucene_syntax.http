@@ -1,0 +1,10 @@
+POST https://{service}.search.windows.net/indexes/kb-index/docs/search?api-version=2026-04-01
+Content-Type: application/json
+
+{
+  "search": "title:quota AND storagee~ AND OneDrive^3",
+  "queryType": "full",
+  "searchFields": "title,chunk",
+  "select": "chunk_id,title,chunk",
+  "top": 5
+}

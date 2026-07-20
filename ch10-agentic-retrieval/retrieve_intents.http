@@ -1,0 +1,13 @@
+POST https://my-search.search.windows.net/knowledgebases/support-kb/retrieve?api-version=2026-04-01
+Content-Type: application/json
+Authorization: Bearer {{accessToken}}
+
+{
+  "intents": [
+    { "type": "semantic",
+      "search": "Business plan encryption at rest, difference from Enterprise, customer-managed keys upgrade requirement" }
+  ],
+  "knowledgeSourceParams": [
+    { "knowledgeSourceName": "kb-docs-ks", "kind": "searchIndex" }
+  ]
+}

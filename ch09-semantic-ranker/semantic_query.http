@@ -1,0 +1,12 @@
+POST https://[service].search.windows.net/indexes/kb-index/docs/search?api-version=2026-04-01
+{
+  "search": "why does my export job stop with a 429 error partway through",
+  "queryType": "semantic",
+  "semanticConfiguration": "kb-semantic",
+  "captions": "extractive|highlight-true",
+  "answers": "extractive|count-3",
+  "highlightPreTag": "<strong>",
+  "highlightPostTag": "</strong>",
+  "select": "id,title,summary,product",
+  "count": true
+}

@@ -1,0 +1,7 @@
+POST https://{service}.search.windows.net/indexes/{index}/analyze?api-version=2025-09-01
+Content-Type: application/json
+
+{
+  "text": "Rotating the SAML signing certificate (v2.1)",
+  "analyzer": "standard.lucene"
+}

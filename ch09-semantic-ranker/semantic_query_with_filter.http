@@ -1,0 +1,10 @@
+POST https://[service].search.windows.net/indexes/kb-index/docs/search?api-version=2026-04-01
+{
+  "search": "product:Foundry AND content:export",
+  "queryType": "full",
+  "semanticQuery": "why does my export job stop with a 429 error partway through",
+  "semanticConfiguration": "kb-semantic",
+  "captions": "extractive|highlight-true",
+  "answers": "extractive|count-3",
+  "select": "id,title,summary,product"
+}

@@ -1,0 +1,143 @@
+{
+  "name": "docqa-index",
+  "fields": [
+    {
+      "name": "id",
+      "type": "Edm.String",
+      "key": true,
+      "filterable": true,
+      "retrievable": true
+    },
+    {
+      "name": "parentId",
+      "type": "Edm.String",
+      "filterable": true,
+      "retrievable": true
+    },
+    {
+      "name": "title",
+      "type": "Edm.String",
+      "searchable": true,
+      "filterable": true,
+      "sortable": true,
+      "retrievable": true,
+      "analyzer": "en.microsoft"
+    },
+    {
+      "name": "content",
+      "type": "Edm.String",
+      "searchable": true,
+      "retrievable": true,
+      "analyzer": "en.microsoft"
+    },
+    {
+      "name": "contentVector",
+      "type": "Collection(Edm.Single)",
+      "searchable": true,
+      "retrievable": false,
+      "stored": false,
+      "dimensions": 3072,
+      "vectorSearchProfile": "hnsw-cosine-compressed"
+    },
+    {
+      "name": "category",
+      "type": "Edm.String",
+      "filterable": true,
+      "facetable": true,
+      "retrievable": true
+    },
+    {
+      "name": "sourceUrl",
+      "type": "Edm.String",
+      "retrievable": true
+    },
+    {
+      "name": "pageNumber",
+      "type": "Edm.Int32",
+      "filterable": true,
+      "sortable": true,
+      "retrievable": true
+    },
+    {
+      "name": "lastModified",
+      "type": "Edm.DateTimeOffset",
+      "filterable": true,
+      "sortable": true,
+      "retrievable": true
+    },
+    {
+      "name": "viewCount",
+      "type": "Edm.Int32",
+      "filterable": true,
+      "sortable": true,
+      "retrievable": false
+    },
+    {
+      "name": "securityIds",
+      "type": "Collection(Edm.String)",
+      "filterable": true,
+      "retrievable": false
+    }
+  ],
+  "vectorSearch": {
+    "algorithms": [
+      {
+        "name": "hnsw-config",
+        "kind": "hnsw",
+        "hnswParameters": {
+          "m": 4,
+          "efConstruction": 400,
+          "efSearch": 500,
+          "metric": "cosine"
+        }
+      }
+    ],
+    "compressions": [
+      {
+        "name": "scalar-compression",
+        "kind": "scalarQuantization",
+        "scalarQuantizationParameters": { "quantizedDataType": "int8" },
+        "rescoringOptions": {
+          "enableRescoring": true,
+          "defaultOversampling": 4,
+          "rescoreStorageMethod": "preserveOriginals"
+        }
+      }
+    ],
+    "profiles": [
+      {
+        "name": "hnsw-cosine-compressed",
+        "algorithm": "hnsw-config",
+        "compression": "scalar-compression"
+      }
+    ]
+  },
+  "scoringProfiles": [
+    {
+      "name": "docqa-boost",
+      "text": { "weights": { "title": 3, "content": 1 } },
+      "functions": [
+        {
+          "type": "freshness",
+          "fieldName": "lastModified",
+          "boost": 2,
+          "interpolation": "quadratic",
+          "freshness": { "boostingDuration": "P90D" }
+        }
+      ],
+      "functionAggregation": "sum"
+    }
+  ],
+  "semantic": {
+    "configurations": [
+      {
+        "name": "docqa-semantic",
+        "prioritizedFields": {
+          "titleField": { "fieldName": "title" },
+          "prioritizedContentFields": [ { "fieldName": "content" } ],
+          "prioritizedKeywordsFields": [ { "fieldName": "category" } ]
+        }
+      }
+    ]
+  }
+}

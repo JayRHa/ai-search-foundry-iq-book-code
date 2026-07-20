@@ -1,0 +1,9 @@
+{
+  "name": "contentVector",
+  "type": "Collection(Edm.Single)",
+  "searchable": true,
+  "retrievable": false,
+  "stored": false,
+  "dimensions": 3072,
+  "vectorSearchProfile": "hnsw-cosine-compressed"
+}

@@ -1,0 +1,25 @@
+POST https://my-search.search.windows.net/knowledgebases/support-kb/retrieve?api-version=2026-05-01-preview
+Content-Type: application/json
+Authorization: Bearer {{accessToken}}
+
+{
+  "messages": [
+    {
+      "role": "assistant",
+      "content": [
+        { "type": "text",
+          "text": "You answer questions about our product using the retrieved sources. Cite each source by ref_id." }
+      ]
+    },
+    {
+      "role": "user",
+      "content": [
+        { "type": "text",
+          "text": "We're on the Business plan - does our data get encrypted at rest, is that different from Enterprise, and do I need to upgrade for customer-managed keys?" }
+      ]
+    }
+  ],
+  "knowledgeSourceParams": [
+    { "knowledgeSourceName": "kb-docs-ks", "kind": "searchIndex" }
+  ]
+}

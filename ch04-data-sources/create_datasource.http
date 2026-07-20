@@ -1,0 +1,17 @@
+POST https://my-search-service.search.windows.net/datasources?api-version=2026-04-01
+Content-Type: application/json
+
+{
+  "name": "product-docs-blob",
+  "type": "azureblob",
+  "credentials": {
+    "connectionString": "ResourceId=/subscriptions/<sub-id>/resourceGroups/rg-knowledge/providers/Microsoft.Storage/storageAccounts/mystorageacct;"
+  },
+  "container": {
+    "name": "product-docs",
+    "query": null
+  },
+  "dataDeletionDetectionPolicy": {
+    "@odata.type": "#Microsoft.Azure.Search.NativeBlobSoftDeleteDeletionDetectionPolicy"
+  }
+}

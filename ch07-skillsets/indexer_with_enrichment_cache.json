@@ -1,0 +1,16 @@
+{
+  "name": "scanned-docs-indexer",
+  "dataSourceName": "scanned-docs-blob",
+  "skillsetName": "ocr-entity-vectorize",
+  "targetIndexName": "scanned-docs-index",
+  "cache": {
+    "storageConnectionString": "<storage-connection-or-managed-identity>",
+    "enableReprocessing": true
+  },
+  "parameters": {
+    "configuration": {
+      "dataToExtract": "contentAndMetadata",
+      "imageAction": "generateNormalizedImages"
+    }
+  }
+}

@@ -1,0 +1,10 @@
+POST https://my-search-svc.search.windows.net/indexes/knowledge/docs/search?api-version=2026-05-01-preview
+Authorization: Bearer {APP_OR_USER_TOKEN}
+x-ms-query-source-authorization: Bearer {END_USER_TOKEN}
+Content-Type: application/json
+
+{
+  "search": "parental leave policy",
+  "select": "id,content",
+  "top": 5
+}

@@ -1,0 +1,14 @@
+POST https://{service}.search.windows.net/indexes/kb-index/docs/search?api-version=2026-04-01
+Content-Type: application/json
+
+{
+  "vectorQueries": [
+    {
+      "kind": "text",
+      "text": "how do I get my laptop to stop overheating",
+      "fields": "text_vector",
+      "k": 5
+    }
+  ],
+  "select": "chunk_id,title,chunk"
+}

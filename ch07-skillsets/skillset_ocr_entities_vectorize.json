@@ -1,0 +1,96 @@
+{
+  "name": "ocr-entity-vectorize",
+  "description": "OCR scanned pages, extract entities, chunk, and embed",
+  "skills": [
+    {
+      "@odata.type": "#Microsoft.Skills.Vision.OcrSkill",
+      "name": "ocr",
+      "context": "/document/normalized_images/*",
+      "detectOrientation": true,
+      "inputs": [
+        { "name": "image", "source": "/document/normalized_images/*" }
+      ],
+      "outputs": [
+        { "name": "text", "targetName": "ocrText" }
+      ]
+    },
+    {
+      "@odata.type": "#Microsoft.Skills.Text.MergeSkill",
+      "name": "merge",
+      "description": "Combine any born-digital text with the OCR'd image text",
+      "context": "/document",
+      "insertPreTag": " ",
+      "insertPostTag": " ",
+      "inputs": [
+        { "name": "text", "source": "/document/content" },
+        { "name": "itemsToInsert", "source": "/document/normalized_images/*/ocrText" },
+        { "name": "offsets", "source": "/document/normalized_images/*/contentOffset" }
+      ],
+      "outputs": [
+        { "name": "mergedText", "targetName": "mergedText" }
+      ]
+    },
+    {
+      "@odata.type": "#Microsoft.Skills.Text.V3.EntityRecognitionSkill",
+      "name": "entities",
+      "context": "/document",
+      "categories": [ "Organization", "Person", "Location" ],
+      "defaultLanguageCode": "en",
+      "inputs": [
+        { "name": "text", "source": "/document/mergedText" }
+      ],
+      "outputs": [
+        { "name": "organizations", "targetName": "organizations" },
+        { "name": "persons",       "targetName": "persons" }
+      ]
+    },
+    {
+      "@odata.type": "#Microsoft.Skills.Text.SplitSkill",
+      "name": "chunk",
+      "context": "/document",
+      "textSplitMode": "pages",
+      "maximumPageLength": 2000,
+      "pageOverlapLength": 200,
+      "inputs": [
+        { "name": "text", "source": "/document/mergedText" }
+      ],
+      "outputs": [
+        { "name": "textItems", "targetName": "chunks" }
+      ]
+    },
+    {
+      "@odata.type": "#Microsoft.Skills.Text.AzureOpenAIEmbeddingSkill",
+      "name": "embed",
+      "context": "/document/chunks/*",
+      "resourceUri": "https://my-foundry-resource.openai.azure.com",
+      "deploymentId": "text-embedding-3-large",
+      "modelName": "text-embedding-3-large",
+      "dimensions": 3072,
+      "inputs": [
+        { "name": "text", "source": "/document/chunks/*" }
+      ],
+      "outputs": [
+        { "name": "embedding", "targetName": "vector" }
+      ]
+    }
+  ],
+  "cognitiveServices": {
+    "@odata.type": "#Microsoft.Azure.Search.AIServicesByIdentity",
+    "subdomainUrl": "https://my-foundry-resource.cognitiveservices.azure.com"
+  },
+  "indexProjections": {
+    "selectors": [
+      {
+        "targetIndexName": "scanned-docs-index",
+        "parentKeyFieldName": "parentId",
+        "sourceContext": "/document/chunks/*",
+        "mappings": [
+          { "name": "chunk",  "source": "/document/chunks/*" },
+          { "name": "vector", "source": "/document/chunks/*/vector" },
+          { "name": "organizations", "source": "/document/organizations" }
+        ]
+      }
+    ],
+    "parameters": { "projectionMode": "skipIndexingParentDocuments" }
+  }
+}

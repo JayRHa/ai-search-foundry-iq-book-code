@@ -1,0 +1,7 @@
+{
+  "name": "content",
+  "type": "Edm.String",
+  "searchable": true,
+  "retrievable": true,
+  "analyzer": "de.microsoft"
+}

@@ -1,0 +1,9 @@
+{
+  "vectorQueries": [
+    { "kind": "text", "text": "reset my password",
+      "fields": "text_vector", "k": 5 }
+  ],
+  "filter": "parent_id eq 'kb-9021'",
+  "vectorFilterMode": "preFilter",
+  "select": "title,chunk"
+}

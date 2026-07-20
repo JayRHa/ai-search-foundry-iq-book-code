@@ -1,0 +1,7 @@
+{
+  "name": "group_ids",
+  "type": "Collection(Edm.String)",
+  "filterable": true,
+  "searchable": false,
+  "retrievable": false
+}

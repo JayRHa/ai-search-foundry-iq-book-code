@@ -1,0 +1,12 @@
+# Python dependencies for the book's code samples.
+# Everything authenticates with DefaultAzureCredential — no keys.
+
+azure-search-documents>=11.6.0
+azure-identity>=1.17.0
+azure-ai-projects>=1.0.0
+azure-ai-evaluation>=1.0.0
+openai>=1.40.0
+requests>=2.32.0
+
+# Only needed if you run the custom Web API skill in ch07 as an Azure Function:
+# azure-functions>=1.20.0

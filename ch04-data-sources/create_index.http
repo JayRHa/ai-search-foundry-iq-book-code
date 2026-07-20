@@ -1,0 +1,14 @@
+POST https://my-search-service.search.windows.net/indexes?api-version=2026-04-01
+Content-Type: application/json
+
+{
+  "name": "product-docs",
+  "fields": [
+    { "name": "id", "type": "Edm.String", "key": true, "searchable": false },
+    { "name": "content", "type": "Edm.String", "searchable": true, "filterable": false },
+    { "name": "title", "type": "Edm.String", "searchable": true, "filterable": true, "sortable": true },
+    { "name": "metadata_storage_name", "type": "Edm.String", "searchable": true, "filterable": true },
+    { "name": "metadata_storage_path", "type": "Edm.String", "filterable": true },
+    { "name": "metadata_storage_last_modified", "type": "Edm.DateTimeOffset", "filterable": true, "sortable": true }
+  ]
+}

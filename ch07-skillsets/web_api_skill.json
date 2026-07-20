@@ -1,0 +1,19 @@
+{
+  "@odata.type": "#Microsoft.Skills.Custom.WebApiSkill",
+  "name": "reading-time",
+  "description": "Word count and reading time via an Azure Function",
+  "uri": "https://my-func-app.azurewebsites.net/api/enrich",
+  "authResourceId": "api://<function-app-entra-app-id>",
+  "httpMethod": "POST",
+  "timeout": "PT30S",
+  "batchSize": 10,
+  "degreeOfParallelism": 3,
+  "context": "/document",
+  "inputs": [
+    { "name": "text", "source": "/document/content" }
+  ],
+  "outputs": [
+    { "name": "wordCount",      "targetName": "wordCount" },
+    { "name": "readingMinutes", "targetName": "readingMinutes" }
+  ]
+}

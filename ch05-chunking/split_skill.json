@@ -1,0 +1,19 @@
+{
+  "@odata.type": "#Microsoft.Skills.Text.SplitSkill",
+  "name": "chunk-text",
+  "description": "Split cracked document text into overlapping token-sized chunks.",
+  "textSplitMode": "pages",
+  "maximumPageLength": 2000,
+  "pageOverlapLength": 200,
+  "unit": "azureOpenAITokens",
+  "azureOpenAITokenizerParameters": {
+    "encoderModelName": "cl100k_base"
+  },
+  "context": "/document",
+  "inputs": [
+    { "name": "text", "source": "/document/content" }
+  ],
+  "outputs": [
+    { "name": "textItems", "targetName": "chunks" }
+  ]
+}

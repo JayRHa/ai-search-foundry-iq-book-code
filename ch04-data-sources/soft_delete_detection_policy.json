@@ -1,0 +1,7 @@
+{
+"dataDeletionDetectionPolicy": {
+  "@odata.type": "#Microsoft.Azure.Search.SoftDeleteColumnDeletionDetectionPolicy",
+  "softDeleteColumnName": "IsDeleted",
+  "softDeleteMarkerValue": "true"
+}
+}
