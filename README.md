@@ -1,7 +1,7 @@
 <!-- jr-brand:start -->
 <div align="center">
   <a href="https://jannikreinhard.com/">
-    <img src="https://raw.githubusercontent.com/JayRHa/.github/main/assets/readme/learning.svg" alt="Jannik Reinhard — Driving AI with passion" width="100%">
+    <img src="https://raw.githubusercontent.com/JayRHa/.github/main/assets/readme/brand-header.png" alt="Jannik Reinhard — Driving AI with passion" width="100%">
   </a>
   <h1>Azure AI Search &amp; Foundry IQ · Book Code</h1>
   <p><strong>Runnable code for the book &#x27;Azure AI Search and Foundry IQ: Grounding Enterprise AI on Your Own Data&#x27; by Jannik Reinhard — organized by chapter, keyless.</strong></p>
