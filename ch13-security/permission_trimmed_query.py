@@ -1,26 +1,35 @@
+"""Query an ACL-enabled index with separate application and user identities.
+
+Set SEARCH_ENDPOINT, SEARCH_INDEX_NAME, and SEARCH_USER_ACCESS_TOKEN.
+Supply the user token through secure runtime configuration. In a web app,
+obtain it from the validated authentication flow. Never print or commit tokens.
+"""
+import os
 import requests
 from azure.identity import DefaultAzureCredential
 
-# App identity — authorizes the CALL to the index (Search Index Data Reader).
-app_token = DefaultAzureCredential().get_token(
-    "https://search.azure.com/.default"
-).token
+def main():
+    endpoint = os.environ["SEARCH_ENDPOINT"].rstrip("/")
+    index = os.environ["SEARCH_INDEX_NAME"]
+    user_token = os.environ["SEARCH_USER_ACCESS_TOKEN"]
+    if not user_token.strip():
+        raise ValueError("SEARCH_USER_ACCESS_TOKEN must contain an end-user access token")
+    with DefaultAzureCredential() as credential:
+        app_token = credential.get_token("https://search.azure.com/.default").token
+        response = requests.post(
+            f"{endpoint}/indexes/{index}/docs/search",
+            params={"api-version": "2026-05-01-preview"},
+            headers={
+                "Authorization": f"Bearer {app_token}",
+                "x-ms-query-source-authorization": user_token,
+                "Content-Type": "application/json",
+            },
+            json={"search": "parental leave policy", "select": "id,content", "top": 5},
+            timeout=30,
+        )
+        response.raise_for_status()
+        for document in response.json()["value"]:
+            print(document["id"])
 
-# End-user token — the identity the results are TRIMMED to. In a web app this
-# is the token you already hold for the signed-in user (on-behalf-of flow).
-end_user_token = get_signed_in_user_token()
-
-resp = requests.post(
-    "https://my-search-svc.search.windows.net/indexes/knowledge/docs/search"
-    "?api-version=2026-05-01-preview",
-    headers={
-        "Authorization": f"Bearer {app_token}",
-        "x-ms-query-source-authorization": f"Bearer {end_user_token}",
-        "Content-Type": "application/json",
-    },
-    json={"search": "parental leave policy", "select": "id,content", "top": 5},
-)
-
-# Every document in resp.json()["value"] is one THIS user is allowed to read.
-for doc in resp.json()["value"]:
-    print(doc["id"])
+if __name__ == "__main__":
+    main()

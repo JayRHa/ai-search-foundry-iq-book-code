@@ -14,6 +14,13 @@
 
 # Azure AI Search and Foundry IQ book code
 
+## October 2026 book revision
+
+The updated example is [ch13-security/permission_trimmed_query.py](ch13-security/permission_trimmed_query.py). Its opening instructions list the required endpoint and deployment variables. Keep credentials out of source files.
+
+The relevant SDK interfaces were checked with Azure AI Projects 2.9.0, Azure Identity 1.26.0, OpenAI 3.35.1, and Anthropic 1.15.0 where applicable. These checks do not replace a test against your own authorized deployment.
+
+
 **Type:** Book companion · **Status:** Community project
 
 <a id="about-this-repository"></a>
